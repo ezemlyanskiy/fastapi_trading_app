@@ -52,4 +52,4 @@ async def add_specific_operations(
 @cache(expire=30)
 async def get_log_op():
     await asyncio.sleep(2)
-    return "Много много данных, которые вычислялись сто лет"
+    return "Long time calculated data"
