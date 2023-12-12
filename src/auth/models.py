@@ -3,7 +3,6 @@ from datetime import datetime
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
 from sqlalchemy import (
     Boolean,
-    MetaData,
     Table,
     Column,
     Integer,
@@ -13,9 +12,7 @@ from sqlalchemy import (
     JSON,
 )
 
-from src.database import Base
-
-metadata = MetaData()
+from src.database import Base, metadata
 
 role = Table(
     "role",
