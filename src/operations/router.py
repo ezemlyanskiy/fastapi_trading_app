@@ -1,4 +1,4 @@
-import time
+import asyncio
 
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi_cache.decorator import cache
@@ -17,9 +17,9 @@ router = APIRouter(
 
 @router.get("/long_operation")
 @cache(expire=30)
-def get_long_op():
-    time.sleep(2)
-    return "Много много данных, которые вычислялись сто лет"
+async def get_long_op():
+    await asyncio.sleep(2)
+    return "Lots of data were calculated lots of time"
 
 
 @router.get("")
@@ -46,7 +46,8 @@ async def get_specific_operations(
 
 @router.post("")
 async def add_specific_operations(
-    new_operation: OperationCreate, session: AsyncSession = Depends(get_async_session)
+    new_operation: OperationCreate,
+    session: AsyncSession = Depends(get_async_session)
 ):
     stmt = insert(operation).values(**new_operation.dict())
     await session.execute(stmt)

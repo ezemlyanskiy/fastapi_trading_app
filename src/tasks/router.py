@@ -11,6 +11,6 @@ def get_dashboard_report(user=Depends(current_user)):
     send_email_dashboard_report.delay(user.username)
     return {
         'status': 200,
-        'data': 'Mail is sended',
+        'data': 'Email is sended',
         'details': None,
     }

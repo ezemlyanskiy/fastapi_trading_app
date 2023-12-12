@@ -4,6 +4,8 @@ services:
   db:
     image: postgres:16-alpine
     container_name: db_app
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
     env_file:
       - .env
   
@@ -61,6 +63,8 @@ services:
     ports:
       - 5555:5555
 
+volumes:
+    postgres_data:
 
 
 # version: "3.7"
