@@ -11,6 +11,7 @@ from src.auth.schemas import UserRead, UserCreate
 from src.operations.router import router as operation_router
 from src.tasks.router import router as tasks_router
 from src.pages.router import router as pages_router
+from src.chat.router import router as chat_router
 from src.config import REDIS_HOST
 
 
@@ -47,6 +48,7 @@ app.include_router(
 app.include_router(operation_router)
 app.include_router(tasks_router)
 app.include_router(pages_router)
+app.include_router(chat_router)
 
 
 origins = [

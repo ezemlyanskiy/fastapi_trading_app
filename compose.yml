@@ -8,13 +8,13 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - .env
-  
+
   db_test:
     image: postgres:16-alpine
     container_name: db_test_app
     env_file:
       - .env
-  
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin_app
@@ -26,7 +26,7 @@ services:
   redis:
     image: redis:7-alpine
     container_name: redis_app
-  
+
   app:
     build:
       context: .
@@ -39,7 +39,7 @@ services:
     depends_on:
       - db
       - redis
-  
+
   celery:
     build:
       context: .

@@ -11,7 +11,7 @@ router = APIRouter(
 templates = Jinja2Templates(directory="src/templates")
 
 
-@router.get("")
+@router.get("/base")
 def get_base_page(request: Request):
     return templates.TemplateResponse("base.html", {"request": request})
 
@@ -28,3 +28,8 @@ def get_search_page(
             "operations": operations["data"],
         }
     )
+
+
+@router.get("/chat")
+def get_chat_page(request: Request):
+    return templates.TemplateResponse("chat.html", {"request": request})
