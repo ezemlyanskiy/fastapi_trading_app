@@ -6,22 +6,24 @@ services:
     container_name: db_app
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    # env_file:
+    #   - .env
     env_file:
-      - .env
+      - .env-non-dev
 
-  db_test:
-    image: postgres:16-alpine
-    container_name: db_test_app
-    env_file:
-      - .env
+  # db_test:
+  #   image: postgres:16-alpine
+  #   container_name: db_test_app
+  #   env_file:
+  #     - .env
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin_app
-    env_file:
-      - .env
-    ports:
-      - 82:80
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   container_name: pgadmin_app
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - 82:80
 
   redis:
     image: redis:7-alpine
@@ -31,8 +33,10 @@ services:
     build:
       context: .
     container_name: fastapi_app
+    # env_file:
+    #   - .env
     env_file:
-      - .env
+      - .env-non-dev
     command: ["/fastapi_app/docker/app.sh"]
     ports:
       - 8000:8000
@@ -44,8 +48,10 @@ services:
     build:
       context: .
     container_name: celery_app
+    # env_file:
+    #   - .env
     env_file:
-      - .env
+      - .env-non-dev
     command: ["/fastapi_app/docker/celery.sh", "celery"]
     depends_on:
       - redis
@@ -54,8 +60,10 @@ services:
     build:
       context: .
     container_name: flower_app
+    # env_file:
+    #   - .env
     env_file:
-      - .env
+      - .env-non-dev
     command: ["/fastapi_app/docker/celery.sh", "flower"]
     depends_on:
       - redis
